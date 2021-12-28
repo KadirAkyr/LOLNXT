@@ -1,14 +1,10 @@
 <template>
   <div>
-    <!-- <div>
-    <button @click="getSummById">Click</button>
-    <h1>Name : {{ this.name }}</h1>
-    <h1>Level : {{ this.level }}</h1>
-    <nuxt-link to="testConnexion">Test connexion page</nuxt-link>
-  </div> -->
-    <div>
+    <div class="searchBar">
       <form action="" @submit.prevent>
         <input v-model="name" type="text" placeholder="Summoner name" />
+        <br />
+        <br />
         <button @click="getSummoner">Search</button>
         <button @click="getMasteries">get Masteries</button>
       </form>
@@ -32,7 +28,9 @@
 </template>
 
 <script>
+import header from "../components/header.vue";
 export default {
+  components: { header },
   data() {
     return {
       name: "",
@@ -59,3 +57,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.searchBar {
+  margin-top: 10rem;
+}
+</style>

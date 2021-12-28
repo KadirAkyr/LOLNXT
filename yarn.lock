@@ -4479,6 +4479,11 @@ launch-editor@^2.3.0:
     picocolors "^1.0.0"
     shell-quote "^1.6.1"
 
+league-api@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/league-api/-/league-api-2.0.0.tgz#c4693beaec2407510a0d3a66f7fc0e96761ac1b7"
+  integrity sha1-xGk76uwkB1EKDTpm9/wOlnYawbc=
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Test</h1>
     <!-- <div>
     <button @click="getSummById">Click</button>
     <h1>Name : {{ this.name }}</h1>

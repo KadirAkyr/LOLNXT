@@ -6,7 +6,6 @@
         <br />
         <br />
         <button @click="getSummoner">Search</button>
-        <button @click="getMasteries">get Masteries</button>
       </form>
       <h1>Name : {{ this.account.name }}</h1>
       <h1>Level : {{ this.account.summonerLevel }}</h1>
@@ -36,20 +35,27 @@ export default {
       name: "",
       account: "",
       champions: "",
+      apikey: "RGAPI-ec3892ad-c523-47e9-8949-f12f00484aa3"
     };
   },
   methods: {
     async getSummoner() {
-      let name = this.name;
-      let link = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=RGAPI-38dab39e-e07a-4cf0-a40f-f972ecd06aae`;
+      try {
+        let name = this.name;
+      let link = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${this.apikey}`;
       let response = await fetch(link);
       response = await response.json();
       this.account = response;
       console.log(response);
+      this.getMasteries()
+      } catch (error) {
+        return "Inexistant summoner name"
+      }
+      
     },
     async getMasteries() {
       let id = this.account.id;
-      let link = `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}?api_key=RGAPI-38dab39e-e07a-4cf0-a40f-f972ecd06aae`;
+      let link = `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}?api_key=${this.apikey}`;
       let response = await fetch(link);
       response = await response.json();
       this.champions = response;

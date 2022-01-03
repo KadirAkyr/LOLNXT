@@ -7,12 +7,16 @@
         <br />
         <button @click="getSummoner">Search</button>
       </form>
-      <h1>Name : {{ this.account.name }}</h1>
-      <h1>Level : {{ this.account.summonerLevel }}</h1>
+      <span>
+        <img :src="this.iconImg" height="120px" width="120px" />
+        Icon :{{ this.account.profileIconId }}</span
+      >
+      <span>Summoner Name : {{ this.account.name }}</span>
+      <span>Level : {{ this.account.summonerLevel }}</span>
       <ul>
-        <h2 v-if="champions">
+        <p v-if="champions">
           List of mastered champions of {{ this.account.name }} :
-        </h2>
+        </p>
         <li v-for="champion in this.champions.slice(0, 5)" :key="champion.id">
           <span>Champion name {{ champion.championId }} </span>
           <br />
@@ -35,23 +39,25 @@ export default {
       name: "",
       account: "",
       champions: "",
-      apikey: "RGAPI-ec3892ad-c523-47e9-8949-f12f00484aa3"
+      apikey: "RGAPI-ec3892ad-c523-47e9-8949-f12f00484aa3",
+      iconImg: "",
     };
   },
   methods: {
     async getSummoner() {
       try {
         let name = this.name;
-      let link = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${this.apikey}`;
-      let response = await fetch(link);
-      response = await response.json();
-      this.account = response;
-      console.log(response);
-      this.getMasteries()
+        let link = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${this.apikey}`;
+        let response = await fetch(link);
+        response = await response.json();
+        this.account = response;
+        console.log(response);
+        this.getMasteries();
+        this.getIcon();
+        this.getChampName();
       } catch (error) {
-        return "Inexistant summoner name"
+        return "Inexistant summoner name";
       }
-      
     },
     async getMasteries() {
       let id = this.account.id;
@@ -59,6 +65,16 @@ export default {
       let response = await fetch(link);
       response = await response.json();
       this.champions = response;
+    },
+    async getIcon() {
+      let link = `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/${this.account.profileIconId}.png`;
+      let response = await fetch(link);
+      this.iconImg = response.url;
+    },
+    async getChampName() {
+      let link = `http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`;
+      let response = await fetch(link);
+      console.log(response);
     },
   },
 };

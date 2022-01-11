@@ -5,7 +5,7 @@
         <span>icon</span>
       </div>
       <div class="header__center">
-        <h1 class="header__brand">HEADER</h1>
+        <h1 class="header__brand">Toxic Tracker</h1>
       </div>
       <div class="header__right">
         <span>icon</span>

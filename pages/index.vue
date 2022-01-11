@@ -7,12 +7,9 @@
         <br />
         <button @click="getSummoner">Search</button>
       </form>
-      <span>
-        <img :src="this.iconImg" height="120px" width="120px" />
-        Icon :{{ this.account.profileIconId }}</span
-      >
-      <span>Summoner Name : {{ this.account.name }}</span>
+      <img :src="this.iconImg" height="120px" width="120px" />
       <span>Level : {{ this.account.summonerLevel }}</span>
+      <h1>Summoner Name : {{ this.account.name }}</h1>
       <ul>
         <p v-if="champions">
           List of mastered champions of {{ this.account.name }} :
@@ -39,7 +36,7 @@ export default {
       name: "",
       account: "",
       champions: "",
-      apikey: "RGAPI-ec3892ad-c523-47e9-8949-f12f00484aa3",
+      apikey: "RGAPI-e2132e24-895b-4830-bfc6-730525f5138c",
       iconImg: "",
     };
   },

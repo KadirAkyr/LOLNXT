@@ -68,6 +68,7 @@ export default {
     },
     async getChampName() {
       // Set champion key
+<<<<<<< HEAD
       const championKeys = [];
       const realChamps = this.champions.slice(0, 5);
       console.log(realChamps);
@@ -93,6 +94,26 @@ export default {
             console.log(this.championsNames);
           });
         });
+=======
+      const championKeys = ["157", "67", "141"];
+      // Get json file
+      fetch(
+        "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+      ).then((response) => {
+        // Get json data
+        response.json().then((json) => {
+          // Object to array
+          const items = Object.values(json.data);
+
+          // Filter to get champion by id
+          const champions = items.filter((item) =>
+            championKeys.includes(item.key)
+          );
+
+          console.log(champions);
+        });
+      });
+>>>>>>> 3ecad7ce1c4b14528a91a490a76d39f831f4853d
     },
   },
 };

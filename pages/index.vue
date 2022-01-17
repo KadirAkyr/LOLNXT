@@ -36,7 +36,7 @@ export default {
       name: "",
       account: "",
       champions: "",
-      apikey: "RGAPI-e2132e24-895b-4830-bfc6-730525f5138c",
+      apikey: "RGAPI-86fa8908-010d-4a68-8d50-cc9fc4f3251b",
       iconImg: "",
     };
   },
@@ -69,9 +69,25 @@ export default {
       this.iconImg = response.url;
     },
     async getChampName() {
-      let link = `http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`;
-      let response = await fetch(link);
-      console.log(response);
+      // Set champion key
+      const championKeys = ["157", "67", "141"];
+      // Get json file
+      fetch(
+        "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+      ).then((response) => {
+        // Get json data
+        response.json().then((json) => {
+          // Object to array
+          const items = Object.values(json.data);
+
+          // Filter to get champion by id
+          const champions = items.filter((item) =>
+            championKeys.includes(item.key)
+          );
+
+          console.log(champions);
+        });
+      });
     },
   },
 };

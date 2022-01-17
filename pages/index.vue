@@ -7,22 +7,21 @@
         <br />
         <button @click="getSummoner">Search</button>
       </form>
-      <img :src="this.iconImg" height="120px" width="120px" />
-      <span>Level : {{ this.account.summonerLevel }}</span>
-      <h1>Summoner Name : {{ this.account.name }}</h1>
-      <ul>
-        <p v-if="champions">
-          List of mastered champions of {{ this.account.name }} :
-        </p>
-        <li v-for="champion in this.champions.slice(0, 5)" :key="champion.id">
-          <span>Champion name {{ champion.championId }} </span>
-          <br />
-          <span> Champion masyery level {{ champion.championLevel }}</span>
-          <br />
-          <span>Champion mastery points {{ champion.championPoints }}</span>
-          <br />
-        </li>
-      </ul>
+      <div v-if="champions">
+        <img :src="this.iconImg" height="120px" width="120px" />
+        <span>Level : {{ this.account.summonerLevel }}</span>
+        <h1>Summoner Name : {{ this.account.name }}</h1>
+        <ul>
+          <p>List of mastered champions of {{ this.account.name }} :</p>
+          <li v-for="champion in this.champions.slice(0, 5)" :key="champion.id">
+            <br />
+            <span> Champion masyery level {{ champion.championLevel }}</span>
+            <br />
+            <span>Champion mastery points {{ champion.championPoints }}</span>
+            <br />
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -36,8 +35,9 @@ export default {
       name: "",
       account: "",
       champions: "",
-      apikey: "RGAPI-e2132e24-895b-4830-bfc6-730525f5138c",
+      apikey: "RGAPI-86fa8908-010d-4a68-8d50-cc9fc4f3251b",
       iconImg: "",
+      championsNames: "",
     };
   },
   methods: {
@@ -48,10 +48,8 @@ export default {
         let response = await fetch(link);
         response = await response.json();
         this.account = response;
-        console.log(response);
         this.getMasteries();
         this.getIcon();
-        this.getChampName();
       } catch (error) {
         return "Inexistant summoner name";
       }
@@ -69,9 +67,32 @@ export default {
       this.iconImg = response.url;
     },
     async getChampName() {
-      let link = `http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`;
-      let response = await fetch(link);
-      console.log(response);
+      // Set champion key
+      const championKeys = [];
+      const realChamps = this.champions.slice(0, 5);
+      console.log(realChamps);
+      realChamps.forEach((champion) => {
+        championKeys.push(champion.championId.toString());
+      }),
+        console.log(championKeys),
+        // Get json file
+        fetch(
+          "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+        ).then((response) => {
+          // Get json data
+          response.json().then((json) => {
+            // Object to array
+            const items = Object.values(json.data);
+
+            // Filter to get champion by id
+            const champions = items.filter((item) =>
+              championKeys.includes(item.key)
+            );
+
+            this.championsNames = champions;
+            console.log(this.championsNames);
+          });
+        });
     },
   },
 };

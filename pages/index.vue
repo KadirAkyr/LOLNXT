@@ -12,13 +12,17 @@
         <span>Level : {{ this.account.summonerLevel }}</span>
         <h1>Summoner Name : {{ this.account.name }}</h1>
         <ul>
-          <p>List of mastered champions of {{ this.account.name }} :</p>
-          <li v-for="champion in this.champions.slice(0, 5)" :key="champion.id">
-            <br />
+          <p>Top 5 champions</p>
+          <li
+            v-for="champion in this.champions.slice(0, 5)"
+            :key="champion.championId"
+          >
             <span> Champion name {{ getChampName(champion.championId) }}</span>
+            <br />
             <span> Champion masyery level {{ champion.championLevel }}</span>
             <br />
             <span>Champion mastery points {{ champion.championPoints }}</span>
+            <br />
             <br />
           </li>
         </ul>
@@ -68,6 +72,8 @@ export default {
       this.iconImg = response.url;
     },
     async getChampName(champId) {
+      console.log("getchamp function");
+
       // Set champion key
       const championKey = champId + "";
       // Get json file
@@ -82,7 +88,7 @@ export default {
           // Filter to get champion by id
           const champion = items.filter((item) => championKey == item.key);
           // console.log(champion[0].id);
-          this.championObject = champion[0];
+          this.championObject = champion[0].name;
           console.log(this.championObject);
           return this.championObject;
         });

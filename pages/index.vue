@@ -15,6 +15,7 @@
           <p>List of mastered champions of {{ this.account.name }} :</p>
           <li v-for="champion in this.champions.slice(0, 5)" :key="champion.id">
             <br />
+            <span> Champion name {{ getChampName(champion.championId) }}</span>
             <span> Champion masyery level {{ champion.championLevel }}</span>
             <br />
             <span>Champion mastery points {{ champion.championPoints }}</span>
@@ -35,9 +36,9 @@ export default {
       name: "",
       account: "",
       champions: "",
-      apikey: "RGAPI-86fa8908-010d-4a68-8d50-cc9fc4f3251b",
+      apikey: "RGAPI-c9020cc1-ce08-43f5-9576-22230a43cce0",
       iconImg: "",
-      championsNames: "",
+      championObject: "",
     };
   },
   methods: {
@@ -66,33 +67,26 @@ export default {
       let response = await fetch(link);
       this.iconImg = response.url;
     },
-    async getChampName() {
+    async getChampName(champId) {
       // Set champion key
-      const championKeys = [];
-      const realChamps = this.champions.slice(0, 5);
-      console.log(realChamps);
-      realChamps.forEach((champion) => {
-        championKeys.push(champion.championId.toString());
-      }),
-        console.log(championKeys),
-        // Get json file
-        fetch(
-          "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
-        ).then((response) => {
-          // Get json data
-          response.json().then((json) => {
-            // Object to array
-            const items = Object.values(json.data);
+      const championKey = champId + "";
+      // Get json file
+      fetch(
+        "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+      ).then((response) => {
+        // Get json data
+        response.json().then((json) => {
+          // Object to array
+          const items = Object.values(json.data);
 
-            // Filter to get champion by id
-            const champions = items.filter((item) =>
-              championKeys.includes(item.key)
-            );
-
-            this.championsNames = champions;
-            console.log(this.championsNames);
-          });
+          // Filter to get champion by id
+          const champion = items.filter((item) => championKey == item.key);
+          // console.log(champion[0].id);
+          this.championObject = champion[0];
+          console.log(this.championObject);
+          return this.championObject;
         });
+      });
     },
   },
 };

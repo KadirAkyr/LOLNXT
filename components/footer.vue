@@ -1,11 +1,13 @@
 <template>
-  <footer class="footer container-fluid">
-    <div class="footer__content container">
-      <div class="footer__left">
-        <p>Track your ennemies</p>
-      </div>
-      <div class="footer__right">
-        <span class="active">EN</span>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="footer__content container">
+        <div class="footer__left">
+          <p>Track your ennemies</p>
+        </div>
+        <div class="footer__right">
+          <span class="active">EN</span>
+        </div>
       </div>
     </div>
   </footer>

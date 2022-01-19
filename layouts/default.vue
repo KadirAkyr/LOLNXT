@@ -7,8 +7,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  async fetch() {
+    this.$store.dispatch("loadChampions");
+  },
+};
 </script>
-
-<style>
-</style>

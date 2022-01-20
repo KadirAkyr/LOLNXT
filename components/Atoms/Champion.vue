@@ -1,10 +1,9 @@
 <template>
   <div class="content">
     <img :src="image" />
-    <p>Champion name {{ champion.name }}</p>
-    <p>{{ champion.blurb }}</p>
-    <p>Champion masyery level {{ championLevel }}</p>
-    <p>Champion mastery points {{ championPoints }}</p>
+    <p>{{ champion.name }}</p>
+    <p>Mastery level {{ championLevel }}</p>
+    <p>Mastery points {{ championPoints }}</p>
     <hr />
   </div>
 </template>

@@ -2,6 +2,7 @@
   <div v-if="summoner.id">
     <MoleculesSummonerInformations />
     <MoleculesSummonerMasteries />
+    <MoleculesSummonerGames />
   </div>
 </template>
 

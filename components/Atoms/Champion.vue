@@ -1,10 +1,19 @@
 <template>
-  <div class="content">
-    <img :src="image" />
-    <p>{{ champion.name }}</p>
-    <p>Mastery level {{ championLevel }}</p>
-    <p>Mastery points {{ championPoints }}</p>
-    <hr />
+  <div class="card">
+    <header class="card-header">
+      <div class="card-image card-header-title is-centered">
+        <figure class="image is-48x48">
+          <img :src="image" />
+        </figure>
+      </div>
+    </header>
+    <div class="card-content">
+      <div class="media-content">
+        <p class="title is-5">{{ champion.name }}</p>
+        <p class="title is-5">Mastery {{ championLevel }}</p>
+        <p class="subtitle is-6">{{ championPoints }} Points !</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,4 +39,7 @@ export default {
 </script>
 
 <style>
+.card {
+  width: 15rem;
+}
 </style>

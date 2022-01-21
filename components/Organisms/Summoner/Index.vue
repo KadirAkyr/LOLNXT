@@ -1,8 +1,16 @@
 <template>
   <div v-if="summoner.id">
-    <MoleculesSummonerInformations />
-    <MoleculesSummonerMasteries />
-    <MoleculesSummonerGames />
+    <div class="columns is-multiline">
+      <div class="column is-full has-background-white-ter">
+        <MoleculesSummonerInformations />
+      </div>
+      <div class="column is-one-quarter">
+        <MoleculesSummonerMasteries />
+      </div>
+      <div class="column">
+        <MoleculesSummonerGames />
+      </div>
+    </div>
   </div>
 </template>
 

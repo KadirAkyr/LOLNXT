@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>Game duration {{ gameDuration }}</p>
-    <pre>{{ gamesId }}</pre>
+    <pre>{{ game }}</pre>
   </div>
 </template>
 
@@ -9,8 +8,16 @@
 // Libs
 import { mapActions } from "vuex";
 export default {
-  props: ["gameDuration", "gamesId"],
-  computed: {
+  data() {
+    return {
+      game: {},
+    };
+  },
+  props: ["gameId"],
+  async fetch() {
+    this.game = await this.getGame(this.gameId);
+  },
+  methods: {
     ...mapActions({
       getGame: "loadGame",
     }),

@@ -1,17 +1,26 @@
 <template>
   <div class="card">
-    <header class="card-header">
-      <div class="card-image card-header-title is-centered">
-        <figure class="image is-48x48">
-          <img :src="image" />
-        </figure>
-      </div>
-    </header>
     <div class="card-content">
-      <div class="media-content">
-        <p class="title is-5">{{ champion.name }}</p>
-        <p class="title is-5">Mastery {{ championLevel }}</p>
-        <p class="subtitle is-6">{{ championPoints }} Points !</p>
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img class="is-rounded" :src="image" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{ champion.name }}</p>
+          <p class="subtitle is-6">Mastery {{ championLevel }}</p>
+        </div>
+      </div>
+      <hr />
+      <div class="icon-text mb-2">
+        <b-icon icon="creation" />
+        <span class="ml-2">{{ champion.tags.join(", ") }}</span>
+      </div>
+
+      <div class="icon-text">
+        <b-icon icon="arm-flex" />
+        <span class="ml-2">{{ championPoints }} pts</span>
       </div>
     </div>
   </div>

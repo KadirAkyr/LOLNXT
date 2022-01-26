@@ -1,4 +1,4 @@
-# lol
+# LOLNXT
 
 ## Build Setup
 

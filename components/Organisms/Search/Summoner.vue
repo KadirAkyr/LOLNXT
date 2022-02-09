@@ -1,12 +1,16 @@
 <template>
-  <form @submit.prevent="search(name)">
-    <input v-model="name" type="text" placeholder="Summoner name" />
-    <button type="submit">Search</button>
-  </form>
+  <div v-if="!summoner.name">
+    <form @submit.prevent="search(name)">
+      <b-field label="Name" v-model="name" placeholder="Summoner name">
+        <b-input v-model="name"></b-input>
+      </b-field>
+      <b-button class="mb-2" type="is-primary is-light submit">Search</b-button>
+    </form>
+  </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -16,6 +20,11 @@ export default {
   methods: {
     ...mapActions({
       search: "searchSummonerByName",
+    }),
+  },
+  computed: {
+    ...mapGetters({
+      summoner: "getSummoner",
     }),
   },
 };

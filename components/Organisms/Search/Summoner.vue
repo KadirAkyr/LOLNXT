@@ -26,6 +26,9 @@ export default {
     ...mapGetters({
       summoner: "getSummoner",
     }),
+    ...mapActions({
+      loadrank: "loadRank",
+    }),
   },
 };
 </script>

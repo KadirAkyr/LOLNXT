@@ -2,7 +2,7 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-aaa403f1-5b4c-45d3-9cf4-1ee63518347a"
+  apiKey: "RGAPI-f1393dea-af56-4636-9b3d-c37719252631"
 })
 
 export const getters = {

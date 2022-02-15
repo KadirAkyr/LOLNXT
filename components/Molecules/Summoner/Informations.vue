@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="card is-full">
     <img :src="icon" height="120px" width="120px" />
-    <span>Level : {{ summoner.summonerLevel }}</span>
-    <h1>Summoner Name : {{ summoner.name }}</h1>
+    <span>{{ summoner.summonerLevel }}</span>
+    <h1>{{ summoner.name }}</h1>
   </div>
 </template>
 

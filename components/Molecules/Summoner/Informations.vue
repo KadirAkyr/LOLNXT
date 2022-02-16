@@ -3,7 +3,6 @@
     <img :src="icon" height="120px" width="120px" />
     <span>{{ summoner.summonerLevel }}</span>
     <h1>{{ summoner.name }}</h1>
-    <pre>{{ summoner }}</pre>
     <pre>{{ rank }}</pre>
   </div>
 </template>

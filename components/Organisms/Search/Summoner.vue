@@ -1,12 +1,10 @@
 <template>
-  <div v-if="!summoner.name">
-    <form @submit.prevent="search(name)">
-      <b-field label="Name" v-model="name" placeholder="Summoner name">
-        <b-input v-model="name"></b-input>
-      </b-field>
-      <b-button class="mb-2" type="is-primary is-light submit">Search</b-button>
-    </form>
-  </div>
+  <form @submit.prevent="search(name)">
+    <b-field v-model="name" placeholder="Summoner name">
+      <b-input v-model="name" placeholder="Summoner Name" />
+    </b-field>
+    <b-button class="mb-2" type="is-primary is-light submit">Search</b-button>
+  </form>
 </template>
 
 <script>
@@ -25,9 +23,6 @@ export default {
   computed: {
     ...mapGetters({
       summoner: "getSummoner",
-    }),
-    ...mapActions({
-      loadrank: "loadRank",
     }),
   },
 };

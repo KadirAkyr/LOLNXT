@@ -2,7 +2,7 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-f1393dea-af56-4636-9b3d-c37719252631",
+  apiKey: "RGAPI-c4010db7-195d-4ebf-8cc7-5cb5954f3648",
   rank: {}
 })
 
@@ -48,13 +48,15 @@ export const actions = {
   },
   async searchSummoner({
     state,
-    commit
+    commit,
+    dispatch
   }, payload) {
     try {
       const search = payload[payload.type];
       const response = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-${payload.type}/${search}?api_key=${state.apiKey}`);
       const summoner = await response.json();
       commit('setSummoner', summoner)
+      dispatch('loadRank')
       return true
     } catch (error) {
       return false
@@ -108,7 +110,7 @@ export const actions = {
     commit
   }, payload) {
     try {
-      const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}`)
+      const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`)
       const rank = await response.json()
       console.log(rank)
       return rank

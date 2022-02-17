@@ -3,7 +3,15 @@
     <img :src="icon" height="120px" width="120px" />
     <span>{{ summoner.summonerLevel }}</span>
     <h1>{{ summoner.name }}</h1>
-    <pre>{{ rank }}</pre>
+    <div v-if="rank">
+      <p>Ranked 5x5 stats</p>
+      <p>{{ rank.tier }}</p>
+      <p>{{ rank.rank }}</p>
+      <p>Wins {{ rank.wins }}</p>
+      <p>Losses {{ rank.losses }}</p>
+      <p>Hot streak {{ rank.hotStreak }}</p>
+      <p>LP {{ rank.leaguePoints }}</p>
+    </div>
   </div>
 </template>
 

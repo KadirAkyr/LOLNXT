@@ -1,6 +1,9 @@
 <template>
   <div>
-    <OrganismsSearchSummoner />
-    <OrganismsSummoner />
+    <!-- <OrganismsSearchSummoner /> -->
+    <OrganismsSummoner class="mt-6" />
   </div>
 </template>
+
+<style scoped>
+</style>

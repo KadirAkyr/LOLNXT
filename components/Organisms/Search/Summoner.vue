@@ -3,7 +3,7 @@
     <b-field v-model="name" placeholder="Summoner name">
       <b-input v-model="name" placeholder="Summoner Name" />
     </b-field>
-    <b-button class="mb-2" type="is-primary is-light submit">Search</b-button>
+    <b-button type="is-primary is-light submit">Search</b-button>
   </form>
 </template>
 

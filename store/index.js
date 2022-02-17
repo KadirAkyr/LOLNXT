@@ -112,7 +112,7 @@ export const actions = {
     try {
       const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`)
       const rank = await response.json()
-      console.log(rank)
+      commit('setRank', rank[0])
       return rank
     } catch (error) {
       return false

@@ -1,7 +1,7 @@
 <template>
   <div v-if="summoner.id">
     <div class="columns is-multiline">
-      <div class="column is-full has-background-white-ter">
+      <div class="column is-full has-background-white-ter header">
         <MoleculesSummonerInformations />
       </div>
       <div class="column is-one-quarter">
@@ -24,3 +24,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.header {
+  border-radius: 1rem;
+}
+</style>

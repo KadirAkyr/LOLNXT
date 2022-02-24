@@ -2,7 +2,7 @@ export default {
   mode: 'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'lol',
+    title: 'Toxic Tracker',
     htmlAttrs: {
       lang: 'en'
     },

@@ -2,8 +2,8 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-25a342f7-788b-40b3-b3f0-68b294365558",
-  rank: {}
+  apiKey: "RGAPI-fcc8b56c-17a8-451a-a486-cad49d6eb4bc",
+  rank: {},
 })
 
 export const getters = {
@@ -18,7 +18,7 @@ export const getters = {
   },
   getRank(state) {
     return state.rank
-  }
+  },
 }
 
 export const mutations = {
@@ -33,7 +33,7 @@ export const mutations = {
   },
   setRank(state, payload) {
     state.rank = payload
-  }
+  },
 }
 
 export const actions = {
@@ -71,7 +71,7 @@ export const actions = {
     })
   },
   async getMasteries({
-    state
+    state,
   }) {
     try {
       const response = await fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`);
@@ -84,7 +84,7 @@ export const actions = {
   async loadGames({
     state,
   }) {
-    const gamesNumber = 7
+    const gamesNumber = 1
     try {
       const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${state.summoner.puuid}/ids?start=0&count=${gamesNumber}&api_key=${state.apiKey}`)
       const games = await response.json()

@@ -1,9 +1,15 @@
 <template>
   <form @submit.prevent="search(name)">
-    <b-field v-model="name" placeholder="Summoner name">
-      <b-input v-model="name" placeholder="Summoner Name" />
+    <b-field grouped>
+      <b-input
+        placeholder="Summoner name"
+        v-model="name"
+        type="search"
+      ></b-input>
+      <p class="control">
+        <b-button class="button is-primary is-light">Search</b-button>
+      </p>
     </b-field>
-    <b-button type="is-primary is-light submit">Search</b-button>
   </form>
 </template>
 

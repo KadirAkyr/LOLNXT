@@ -1,7 +1,7 @@
 <template>
   <div v-if="masteries.length">
-    <h2>Top 5 champions</h2>
-    <div v-for="champion in champions" :key="champion.id">
+    <h2 class="title is-3">Top 5 champions</h2>
+    <div v-for="champion in champions" :key="champion.id" class="block">
       <AtomsChampion v-bind="champion" />
     </div>
   </div>
@@ -30,3 +30,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.title {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+</style>

@@ -1,7 +1,9 @@
 export const state = () => ({
   summoner: {},
   champions: [],
-  apiKey: "RGAPI-c9020cc1-ce08-43f5-9576-22230a43cce0"
+  games: [],
+  apiKey: "RGAPI-fcc8b56c-17a8-451a-a486-cad49d6eb4bc",
+  rank: {},
 })
 
 export const getters = {
@@ -10,7 +12,13 @@ export const getters = {
   },
   getChampions(state) {
     return state.champions
-  }
+  },
+  getGames(state) {
+    return state.games
+  },
+  getRank(state) {
+    return state.rank
+  },
 }
 
 export const mutations = {
@@ -19,7 +27,13 @@ export const mutations = {
   },
   setChampions(state, payload) {
     state.champions = payload
-  }
+  },
+  setGames(state, payload) {
+    state.games = payload
+  },
+  setRank(state, payload) {
+    state.rank = payload
+  },
 }
 
 export const actions = {
@@ -34,13 +48,15 @@ export const actions = {
   },
   async searchSummoner({
     state,
-    commit
+    commit,
+    dispatch
   }, payload) {
     try {
       const search = payload[payload.type];
       const response = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-${payload.type}/${search}?api_key=${state.apiKey}`);
       const summoner = await response.json();
       commit('setSummoner', summoner)
+      dispatch('loadRank')
       return true
     } catch (error) {
       return false
@@ -55,7 +71,7 @@ export const actions = {
     })
   },
   async getMasteries({
-    state
+    state,
   }) {
     try {
       const response = await fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`);
@@ -63,6 +79,42 @@ export const actions = {
       return masteries
     } catch (error) {
       return []
+    }
+  },
+  async loadGames({
+    state,
+  }) {
+    const gamesNumber = 1
+    try {
+      const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${state.summoner.puuid}/ids?start=0&count=${gamesNumber}&api_key=${state.apiKey}`)
+      const games = await response.json()
+      return games
+    } catch (error) {
+      return false
+    }
+  },
+  async loadGame({
+    state
+  }, matchId) {
+    try {
+      const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${state.apiKey}`)
+      const game = await response.json()
+      return game
+    } catch (error) {
+      return false
+    }
+  },
+  async loadRank({
+    state,
+    commit
+  }, payload) {
+    try {
+      const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`)
+      const rank = await response.json()
+      commit('setRank', rank[0])
+      return rank
+    } catch (error) {
+      return false
     }
   }
 }

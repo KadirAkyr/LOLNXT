@@ -1,11 +1,28 @@
 <template>
-  <div class="content">
-    <img :src="image" />
-    <p>Champion name {{ champion.name }}</p>
-    <p>{{ champion.blurb }}</p>
-    <p>Champion masyery level {{ championLevel }}</p>
-    <p>Champion mastery points {{ championPoints }}</p>
-    <hr />
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img class="is-rounded" :src="image" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{ champion.name }}</p>
+          <p class="subtitle is-6">Mastery {{ championLevel }}</p>
+        </div>
+      </div>
+      <hr />
+      <div class="icon-text mb-2">
+        <b-icon icon="creation" />
+        <span class="ml-2">{{ champion.tags.join(", ") }}</span>
+      </div>
+
+      <div class="icon-text">
+        <b-icon icon="arm-flex" />
+        <span class="ml-2">{{ championPoints }} pts</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +46,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

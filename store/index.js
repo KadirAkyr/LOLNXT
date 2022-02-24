@@ -99,7 +99,6 @@ export const actions = {
     try {
       const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${state.apiKey}`)
       const game = await response.json()
-      console.log('Done ! ' + game);
       return game
     } catch (error) {
       return false

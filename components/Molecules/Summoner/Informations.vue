@@ -59,6 +59,9 @@
       >
         <span class="chartValue"> {{ winRatio }}% </span>
       </div>
+      <p class="winLose has-text-centered mt-2">
+        {{ rank.wins }} V - {{ rank.losses }} L
+      </p>
     </div>
   </div>
 </template>

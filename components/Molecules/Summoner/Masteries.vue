@@ -30,3 +30,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.title {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+</style>

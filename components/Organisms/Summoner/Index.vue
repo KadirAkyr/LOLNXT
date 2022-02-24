@@ -1,13 +1,23 @@
 <template>
   <div v-if="summoner.id">
     <div class="columns is-multiline">
-      <div class="column is-full has-background-white-ter header">
+      <div class="column is-full has-background-white-ter roundedCorners mb-6">
         <MoleculesSummonerInformations />
       </div>
-      <div class="column is-one-quarter">
+      <div
+        class="
+          column
+          is-one-quarter
+          has-background-white-ter
+          px-5
+          py-6
+          is-relative
+          roundedCorners
+        "
+      >
         <MoleculesSummonerMasteries />
       </div>
-      <div class="column">
+      <div class="column is-three-quarters">
         <MoleculesSummonerGames />
       </div>
     </div>
@@ -25,7 +35,7 @@ export default {
 };
 </script>
 <style scoped>
-.header {
+.roundedCorners {
   border-radius: 1rem;
 }
 </style>

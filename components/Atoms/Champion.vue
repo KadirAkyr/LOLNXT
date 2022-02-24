@@ -46,9 +46,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.card {
-  width: 15rem;
-}
-</style>

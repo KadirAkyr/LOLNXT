@@ -3,13 +3,21 @@
     <div class="column" v-if="$fetchState.pending"></div>
     <div class="column" v-else>
       <p>Champion name: {{ player.championName }}</p>
-      <p>{{ player.item0 }}</p>
-      <p>{{ player.item1 }}</p>
-      <p>{{ player.item2 }}</p>
-      <p>{{ player.item3 }}</p>
-      <p>{{ player.item4 }}</p>
-      <p>{{ player.item5 }}</p>
-      <p>{{ player.item6 }}</p>
+      <p>{{ championImage }}</p>
+
+      <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
+      <p>{{ winOrLose }}</p>
+      <p>CS {{ player.totalMinionsKilled }}</p>
+      <p>KDA {{ kda }}</p>
+      <div class="items">
+        <img :src="item0" />
+        <img :src="item1" />
+        <img :src="item2" />
+        <img :src="item3" />
+        <img :src="item4" />
+        <img :src="item5" />
+        <img :src="item6" />
+      </div>
       <pre>{{ player }}</pre>
     </div>
   </div>
@@ -18,6 +26,7 @@
 <script>
 // Libs
 import { mapActions, mapGetters } from "vuex";
+import _ from "lodash";
 export default {
   data() {
     return {
@@ -31,12 +40,56 @@ export default {
   computed: {
     ...mapGetters({
       summoner: "getSummoner",
+      champions: "getChampions",
     }),
     player() {
       const tab = this.game.info.participants.filter(
         (e) => e.summonerName === this.summoner.name
       );
       return tab[0];
+    },
+    item0() {
+      if (this.player.item0 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item0}.png`;
+    },
+    item1() {
+      if (this.player.item1 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item1}.png`;
+    },
+    item2() {
+      if (this.player.item2 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item2}.png`;
+    },
+    item3() {
+      if (this.player.item3 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item3}.png`;
+    },
+    item4() {
+      if (this.player.item4 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item4}.png`;
+    },
+    item5() {
+      if (this.player.item5 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item5}.png`;
+    },
+    item6() {
+      if (this.player.item6 != 0)
+        return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/item/${this.player.item6}.png`;
+    },
+    kda() {
+      return _.round(this.player.challenges.kda, 2);
+    },
+    winOrLose() {
+      if (this.player.wins) return "Victory";
+      return "Defeat";
+    },
+    champion() {
+      return Object.values(this.champions).find(
+        (champion) => champion.key === this.player.championId
+      );
+    },
+    image() {
+      return `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/${this.champion.image.full}`;
     },
   },
   methods: {

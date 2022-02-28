@@ -16,9 +16,15 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
+      <div class="summs">
+        <p>{{ player.summoner1Id }}</p>
+        <p>{{ player.summoner2Id }}</p>
+      </div>
       <hr />
-      <!-- <pre>{{ player }}</pre> -->
-      <pre> {{ summonerSpells }} </pre>
+      <!-- <pre> {{ summSpells1.image }} </pre> -->
+      <!-- <img :src="summSpells1.image.full" /> -->
+      <!-- <pre> {{ summSpells2.id }} </pre> -->
+      <!-- <img :src="summSpells2.image.full" /> -->
     </div>
   </div>
 </template>
@@ -36,6 +42,7 @@ export default {
   props: ["gameId"],
   async fetch() {
     this.game = await this.getGame(this.gameId);
+    // this.$store.dispatch("loadSpells");
   },
   computed: {
     ...mapGetters({
@@ -84,6 +91,16 @@ export default {
       if (this.player.wins) return "Victory";
       return "Defeat";
     },
+    // summSpells1() {
+    //   return Object.values(this.summonerSpells).find(
+    //     (spell) => spell.key == this.player.summoner1Id
+    //   );
+    // },
+    // summSpells2() {
+    //   return Object.values(this.summonerSpells).find(
+    //     (spell) => spell.key == this.player.summoner2Id
+    //   );
+    // },
   },
   methods: {
     ...mapActions({

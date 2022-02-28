@@ -68,6 +68,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import _ from "lodash";
 export default {
   computed: {
     ...mapGetters({
@@ -75,10 +76,12 @@ export default {
       rank: "getRank",
     }),
     rankIcon() {
-      return `/ranked/${this.rank.tier}.png`;
+      const rankName = _.capitalize(this.rank.tier);
+      return `/ranked/${rankName}.png`;
     },
     icon() {
-      return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/profileicon/${this.summoner.profileIconId}.png`;
+      const rankName = this.summoner.profileIconId;
+      return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/profileicon/${rankName}.png`;
     },
     winRatio() {
       return (

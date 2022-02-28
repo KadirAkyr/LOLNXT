@@ -16,7 +16,6 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
-      <pre> {{ spells }} </pre>
       <pre>{{ player }}</pre>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="columns">
     <div class="column" v-if="$fetchState.pending"></div>
     <div class="column" v-else>
-      <p>Champion name: {{ player.championName }}</p>
+      <p>{{ player.championName }}</p>
       <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
       <p>{{ winOrLose }}</p>
       <p>CS {{ player.totalMinionsKilled }}</p>
@@ -16,15 +16,11 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
-      <div class="summs">
-        <p>{{ player.summoner1Id }}</p>
-        <p>{{ player.summoner2Id }}</p>
+      <div class="summs" v-if="spells.length">
+        <img :src="imageSpell1" />
+        <img :src="imageSpell2" />
+        <hr />
       </div>
-      <hr />
-      <!-- <pre> {{ summSpells1.image }} </pre> -->
-      <!-- <img :src="summSpells1.image.full" /> -->
-      <!-- <pre> {{ summSpells2.id }} </pre> -->
-      <!-- <img :src="summSpells2.image.full" /> -->
     </div>
   </div>
 </template>
@@ -42,7 +38,7 @@ export default {
   props: ["gameId"],
   async fetch() {
     this.game = await this.getGame(this.gameId);
-    // this.$store.dispatch("loadSpells");
+    this.$store.dispatch("loadSpells");
   },
   computed: {
     ...mapGetters({
@@ -91,16 +87,25 @@ export default {
       if (this.player.wins) return "Victory";
       return "Defeat";
     },
-    // summSpells1() {
-    //   return Object.values(this.summonerSpells).find(
-    //     (spell) => spell.key == this.player.summoner1Id
-    //   );
-    // },
-    // summSpells2() {
-    //   return Object.values(this.summonerSpells).find(
-    //     (spell) => spell.key == this.player.summoner2Id
-    //   );
-    // },
+    summSpells1() {
+      return Object.values(this.summonerSpells).find(
+        (spell) => spell.key == this.player.summoner1Id
+      );
+    },
+    summSpells2() {
+      return Object.values(this.summonerSpells).find(
+        (spell) => spell.key == this.player.summoner2Id
+      );
+    },
+    spells() {
+      return Object.values(this.summonerSpells);
+    },
+    imageSpell1() {
+      return `http://ddragon.leagueoflegends.com/cdn/12.4.1/img/spell/${this.summSpells1.image.full}`;
+    },
+    imageSpell2() {
+      return `http://ddragon.leagueoflegends.com/cdn/12.4.1/img/spell/${this.summSpells2.image.full}`;
+    },
   },
   methods: {
     ...mapActions({

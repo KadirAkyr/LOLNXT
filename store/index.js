@@ -4,7 +4,7 @@ export const state = () => ({
   games: [],
   apiKey: "RGAPI-337a2467-6c5d-4f94-82f9-0e5e7e6a559c",
   rank: {},
-  spells: []
+  spells: {}
 })
 
 export const getters = {

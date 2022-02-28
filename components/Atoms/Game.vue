@@ -16,7 +16,9 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
-      <pre>{{ player }}</pre>
+      <hr />
+      <!-- <pre>{{ player }}</pre> -->
+      <pre> {{ summonerSpells }} </pre>
     </div>
   </div>
 </template>
@@ -39,7 +41,7 @@ export default {
     ...mapGetters({
       summoner: "getSummoner",
       champions: "getChampions",
-      spells: "getSpells",
+      summonerSpells: "getSpells",
     }),
     player() {
       const tab = this.game.info.participants.filter(

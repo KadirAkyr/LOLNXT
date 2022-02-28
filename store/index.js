@@ -2,8 +2,9 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-8bd5d12f-7c6b-4b51-8e93-ab3c12b0b995",
+  apiKey: "RGAPI-337a2467-6c5d-4f94-82f9-0e5e7e6a559c",
   rank: {},
+  spells: []
 })
 
 export const getters = {
@@ -12,6 +13,9 @@ export const getters = {
   },
   getChampions(state) {
     return state.champions
+  },
+  getSpells(state) {
+    return state.spells
   },
   getGames(state) {
     return state.games
@@ -27,6 +31,9 @@ export const mutations = {
   },
   setChampions(state, payload) {
     state.champions = payload
+  },
+  setSpells(state, payload) {
+    state.spells = payload
   },
   setGames(state, payload) {
     state.games = payload
@@ -45,6 +52,13 @@ export const actions = {
     )
     const champions = await response.json()
     commit('setChampions', champions.data)
+  },
+  async loadSpells({
+    commit
+  }) {
+    const response = await fetch("http://ddragon.leagueoflegends.com/cdn/12.4.1/data/en_US/summoner.json")
+    const spells = await response.json()
+    commit('setSpells', spells.data)
   },
   async searchSummoner({
     state,
@@ -84,7 +98,7 @@ export const actions = {
   async loadGames({
     state,
   }) {
-    const gamesNumber = 1
+    const gamesNumber = 5
     try {
       const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${state.summoner.puuid}/ids?start=0&count=${gamesNumber}&api_key=${state.apiKey}`)
       const games = await response.json()

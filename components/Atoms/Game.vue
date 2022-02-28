@@ -3,8 +3,6 @@
     <div class="column" v-if="$fetchState.pending"></div>
     <div class="column" v-else>
       <p>Champion name: {{ player.championName }}</p>
-      <p>{{ championImage }}</p>
-
       <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
       <p>{{ winOrLose }}</p>
       <p>CS {{ player.totalMinionsKilled }}</p>
@@ -18,6 +16,7 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
+      <pre> {{ spells }} </pre>
       <pre>{{ player }}</pre>
     </div>
   </div>
@@ -41,6 +40,7 @@ export default {
     ...mapGetters({
       summoner: "getSummoner",
       champions: "getChampions",
+      spells: "getSpells",
     }),
     player() {
       const tab = this.game.info.participants.filter(
@@ -82,14 +82,6 @@ export default {
     winOrLose() {
       if (this.player.wins) return "Victory";
       return "Defeat";
-    },
-    champion() {
-      return Object.values(this.champions).find(
-        (champion) => champion.key === this.player.championId
-      );
-    },
-    image() {
-      return `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/${this.champion.image.full}`;
     },
   },
   methods: {

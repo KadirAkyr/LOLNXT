@@ -14,6 +14,7 @@
 export default {
   async fetch() {
     this.$store.dispatch("loadChampions");
+    this.$store.dispatch("loadSpells");
   },
 };
 </script>

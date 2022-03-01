@@ -4,6 +4,8 @@
     <div class="column" v-else>
       <!-- <pre> {{ game }} </pre> -->
       <!-- <pre> {{ player }} </pre> -->
+      <!-- <pre> {{ champion }} </pre> -->
+      <img :src="imageChamp" />
       <p>{{ player.championName }}</p>
       <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
       <p>{{ winOrLose }}</p>
@@ -40,7 +42,6 @@ export default {
   props: ["gameId"],
   async fetch() {
     this.game = await this.getGame(this.gameId);
-    this.$store.dispatch("loadSpells");
   },
   computed: {
     ...mapGetters({
@@ -107,6 +108,14 @@ export default {
     },
     imageSpell2() {
       return `http://ddragon.leagueoflegends.com/cdn/12.4.1/img/spell/${this.summSpells2.image.full}`;
+    },
+    imageChamp() {
+      return `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/${this.champion.image.full}`;
+    },
+    champion() {
+      return Object.values(this.champions).find(
+        (champion) => champion.key === this.player.championId.toString()
+      );
     },
   },
   methods: {

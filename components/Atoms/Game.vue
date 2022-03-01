@@ -1,17 +1,31 @@
 <template>
-  <div class="columns">
-    <div class="column" v-if="$fetchState.pending"></div>
-    <div class="column" v-else>
-      <!-- <pre> {{ game }} </pre> -->
-      <!-- <pre> {{ player }} </pre> -->
-      <!-- <pre> {{ champion }} </pre> -->
-      <img :src="imageChamp" />
-      <p>{{ player.championName }}</p>
-      <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
-      <p>{{ winOrLose }}</p>
-      <p>CS {{ player.totalMinionsKilled }}</p>
-      <p>KDA {{ kda }}</p>
-      <div class="items">
+  <div class="game card">
+    <div class="game__content" v-if="$fetchState.pending"></div>
+    <div class="game__content" v-else>
+      <div class="game__profile" v-if="spells.length">
+        <div class="game__profile__images">
+          <b-image rounded class="game__champion" :src="imageChamp" />
+          <b-image rounded class="game__spell" :src="imageSpell1" />
+          <b-image rounded class="game__spell" :src="imageSpell2" />
+        </div>
+        <p class="has-text-centered has-text-weight-bold mt-2">
+          {{ player.championName }}
+        </p>
+      </div>
+      <div class="game__score">
+        <p class="has-text-centered">Score</p>
+        <p class="has-text-weight-bold">
+          <span class="has-text-success">{{ player.kills }} </span> /
+          <span class="has-text-danger">{{ player.deaths }}</span> /
+          <span>{{ player.assists }}</span>
+        </p>
+        <p :class="kda > 2.5 ? 'has-text-success' : 'has-text-danger'">
+          {{ kda }} KDA
+        </p>
+        <p>{{ player.totalMinionsKilled }} CS</p>
+      </div>
+      <div class="game__items">
+        <p>Items</p>
         <img :src="item0" />
         <img :src="item1" />
         <img :src="item2" />
@@ -20,10 +34,9 @@
         <img :src="item5" />
         <img :src="item6" />
       </div>
-      <div class="summs" v-if="spells.length">
-        <img :src="imageSpell1" />
-        <img :src="imageSpell2" />
-        <hr />
+      <div class="game__result">
+        <p>{{ winOrLose }}</p>
+        <b-icon icon="crown" />
       </div>
     </div>
   </div>
@@ -126,5 +139,37 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.game {
+  padding: 1.5rem 0;
+  margin-bottom: 1rem;
+}
+.game__content {
+  display: flex;
+}
+.game__content > * {
+  padding: 0 1.5rem;
+}
+.game__content > *:not(:first-child) {
+  border-left: solid 1px rgba(0, 0, 0, 0.1);
+}
+.game__profile__images {
+  position: relative;
+}
+.game__champion {
+  width: 96px;
+  height: 96px;
+}
+.game__spell {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  bottom: 0;
+}
+.game__spell:first-child {
+  left: 0;
+}
+.game__spell:last-child {
+  right: 0;
+}
 </style>

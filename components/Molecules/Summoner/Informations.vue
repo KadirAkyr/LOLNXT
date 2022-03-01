@@ -59,8 +59,9 @@
       >
         <span class="chartValue"> {{ winRatio }}% </span>
       </div>
-      <p class="winLose has-text-centered mt-2">
-        {{ lolStats.wins }} V - {{ lolStats.losses }} L
+      <p class="winLose has-text-centered mt-2 has-text-weight-bold">
+        <span class="has-text-success">{{ lolStats.wins }} V</span> -
+        <span class="has-text-danger">{{ lolStats.losses }} L</span>
       </p>
     </div>
   </div>

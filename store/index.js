@@ -2,8 +2,8 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-337a2467-6c5d-4f94-82f9-0e5e7e6a559c",
-  rank: {},
+  apiKey: "RGAPI-75c9cd77-4c54-4768-8b7d-f2a4ab647dde",
+  rank: [],
   spells: {}
 })
 
@@ -125,7 +125,7 @@ export const actions = {
     try {
       const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`)
       const rank = await response.json()
-      commit('setRank', rank[0])
+      commit('setRank', rank)
       return rank
     } catch (error) {
       return false

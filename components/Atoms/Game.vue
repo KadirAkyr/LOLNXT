@@ -2,6 +2,8 @@
   <div class="columns">
     <div class="column" v-if="$fetchState.pending"></div>
     <div class="column" v-else>
+      <!-- <pre> {{ game }} </pre> -->
+      <!-- <pre> {{ player }} </pre> -->
       <p>{{ player.championName }}</p>
       <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
       <p>{{ winOrLose }}</p>
@@ -84,7 +86,7 @@ export default {
       return _.round(this.player.challenges.kda, 2);
     },
     winOrLose() {
-      if (this.player.wins) return "Victory";
+      if (this.player.win) return "Victory";
       return "Defeat";
     },
     summSpells1() {

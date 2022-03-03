@@ -2,7 +2,7 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-75c9cd77-4c54-4768-8b7d-f2a4ab647dde",
+  apiKey: "RGAPI-f53f66d1-d8fc-4851-9cb1-9d013a5bfc36",
   rank: [],
   spells: {}
 })
@@ -98,7 +98,7 @@ export const actions = {
   async loadGames({
     state,
   }) {
-    const gamesNumber = 5
+    const gamesNumber = 10
     try {
       const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${state.summoner.puuid}/ids?start=0&count=${gamesNumber}&api_key=${state.apiKey}`)
       const games = await response.json()

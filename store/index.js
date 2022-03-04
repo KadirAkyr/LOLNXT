@@ -48,7 +48,7 @@ export const actions = {
     commit
   }) {
     const response = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+      "http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json"
     )
     const champions = await response.json()
     commit('setChampions', champions.data)
@@ -56,7 +56,7 @@ export const actions = {
   async loadSpells({
     commit
   }) {
-    const response = await fetch("http://ddragon.leagueoflegends.com/cdn/12.4.1/data/en_US/summoner.json")
+    const response = await fetch("http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/summoner.json")
     const spells = await response.json()
     commit('setSpells', spells.data)
   },

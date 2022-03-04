@@ -123,7 +123,7 @@ export default {
       return `http://ddragon.leagueoflegends.com/cdn/12.4.1/img/spell/${this.summSpells2.image.full}`;
     },
     imageChamp() {
-      return `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/${this.champion.image.full}`;
+      return `https://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/${this.champion.image.full}`;
     },
     champion() {
       return Object.values(this.champions).find(

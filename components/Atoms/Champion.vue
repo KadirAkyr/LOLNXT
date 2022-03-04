@@ -41,7 +41,7 @@ export default {
       );
     },
     image() {
-      return `https://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/${this.champion.image.full}`;
+      return `https://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/${this.champion.image.full}`;
     },
   },
 };

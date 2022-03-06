@@ -2,8 +2,9 @@ export const state = () => ({
   summoner: {},
   champions: [],
   games: [],
-  apiKey: "RGAPI-fcc8b56c-17a8-451a-a486-cad49d6eb4bc",
-  rank: {},
+  apiKey: "RGAPI-7b453747-078b-452b-9f05-7bb9f6aa7aed",
+  rank: [],
+  spells: {}
 })
 
 export const getters = {
@@ -12,6 +13,9 @@ export const getters = {
   },
   getChampions(state) {
     return state.champions
+  },
+  getSpells(state) {
+    return state.spells
   },
   getGames(state) {
     return state.games
@@ -28,6 +32,9 @@ export const mutations = {
   setChampions(state, payload) {
     state.champions = payload
   },
+  setSpells(state, payload) {
+    state.spells = payload
+  },
   setGames(state, payload) {
     state.games = payload
   },
@@ -41,10 +48,17 @@ export const actions = {
     commit
   }) {
     const response = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json"
+      "http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json"
     )
     const champions = await response.json()
     commit('setChampions', champions.data)
+  },
+  async loadSpells({
+    commit
+  }) {
+    const response = await fetch("http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/summoner.json")
+    const spells = await response.json()
+    commit('setSpells', spells.data)
   },
   async searchSummoner({
     state,
@@ -84,7 +98,7 @@ export const actions = {
   async loadGames({
     state,
   }) {
-    const gamesNumber = 1
+    const gamesNumber = 10
     try {
       const response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${state.summoner.puuid}/ids?start=0&count=${gamesNumber}&api_key=${state.apiKey}`)
       const games = await response.json()
@@ -111,7 +125,7 @@ export const actions = {
     try {
       const response = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${state.summoner.id}?api_key=${state.apiKey}`)
       const rank = await response.json()
-      commit('setRank', rank[0])
+      commit('setRank', rank)
       return rank
     } catch (error) {
       return false

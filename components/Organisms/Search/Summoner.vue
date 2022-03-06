@@ -7,7 +7,7 @@
         type="search"
       ></b-input>
       <p class="control">
-        <b-button class="button is-primary is-light">Search</b-button>
+        <b-button class="button is-primary is-light">Track</b-button>
       </p>
     </b-field>
   </form>

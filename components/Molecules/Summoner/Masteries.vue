@@ -1,24 +1,40 @@
 <template>
-  <div v-if="masteries.length">
-    <h2 class="title is-3">Top 5 champions</h2>
-    <div v-for="champion in champions" :key="champion.id" class="block">
-      <AtomsChampion v-bind="champion" />
+  <div>
+    <div v-if="$fetchState.pending">Loading ...</div>
+    <div v-else>
+      <div v-if="masteries.length">
+        <h2 class="title is-3">Top 5 champions</h2>
+        <div v-for="champion in champions" :key="champion.id" class="block">
+          <AtomsChampion v-bind="champion" />
+        </div>
+      </div>
+      <div v-else>
+        <p class="has-text-centered">No top champions</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
       masteries: [],
     };
   },
+  watch: {
+    async summoner() {
+      this.masteries = await this.getMasteries();
+    },
+  },
   async fetch() {
     this.masteries = await this.getMasteries();
   },
   computed: {
+    ...mapGetters({
+      summoner: "getSummoner",
+    }),
     champions() {
       return this.masteries.splice(0, 5);
     },

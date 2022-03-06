@@ -3,9 +3,9 @@
     <div class="column is-narrow pr-5">
       <div class="is-relative mb-4">
         <img :src="icon" height="120px" width="120px" class="profilIcon" />
-        <template v-if="rank">
+        <template v-if="lolStats">
           <b-icon
-            v-if="rank.hotstreak"
+            v-if="lolStats.hotstreak"
             type="is-white"
             icon="fire"
             class="hotstreak"
@@ -19,7 +19,7 @@
         {{ summoner.name }}
       </h1>
     </div>
-    <div v-if="rank" class="column is-flex has-border-left pl-5">
+    <div v-if="lolStats" class="column is-flex has-border-left pl-5">
       <img
         :src="rankIcon"
         width="120px"
@@ -29,9 +29,9 @@
       <div class="rankInfo">
         <p class="is-size-7 mb-2 mt-4">Ranked Solo</p>
         <p class="has-text-weight-bold is-size-1 mb-2">
-          {{ rank.tier }} {{ rank.rank }}
+          {{ lolStats.tier }} {{ lolStats.rank }}
         </p>
-        <p class="ml-1">{{ rank.leaguePoints }} LP</p>
+        <p class="ml-1">{{ lolStats.leaguePoints }} LP</p>
       </div>
     </div>
     <div v-else class="column is-flex has-border-left pl-5">
@@ -46,7 +46,7 @@
         <p class="has-text-weight-bold is-size-1 mb-2">Unranked</p>
       </div>
     </div>
-    <div v-if="rank" class="column is-narrow pl-5 has-border-left">
+    <div v-if="lolStats" class="column is-narrow pl-5 has-border-left">
       <div
         class="chart"
         :style="
@@ -59,8 +59,9 @@
       >
         <span class="chartValue"> {{ winRatio }}% </span>
       </div>
-      <p class="winLose has-text-centered mt-2">
-        {{ rank.wins }} V - {{ rank.losses }} L
+      <p class="winLose has-text-centered mt-2 has-text-weight-bold">
+        <span class="has-text-success">{{ lolStats.wins }} V</span> -
+        <span class="has-text-danger">{{ lolStats.losses }} L</span>
       </p>
     </div>
   </div>
@@ -68,6 +69,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import _ from "lodash";
 export default {
   computed: {
     ...mapGetters({
@@ -75,17 +77,25 @@ export default {
       rank: "getRank",
     }),
     rankIcon() {
-      return `/ranked/${this.rank.tier}.png`;
+      const rankName = _.capitalize(this.lolStats.tier);
+      return `/ranked/${rankName}.png`;
     },
     icon() {
-      return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/profileicon/${this.summoner.profileIconId}.png`;
+      const rankName = this.summoner.profileIconId;
+      return `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/profileicon/${rankName}.png`;
     },
     winRatio() {
-      return (
-        Math.round(
-          (this.rank.wins / (this.rank.wins + this.rank.losses)) * 1000
-        ) * 0.1
+      return _.round(
+        (this.lolStats.wins / (this.lolStats.wins + this.lolStats.losses)) *
+          100,
+        1
       );
+    },
+    lolStats() {
+      const solo = this.rank.filter(
+        (type) => type.queueType === "RANKED_SOLO_5x5"
+      );
+      return solo[0];
     },
   },
 };

@@ -26,13 +26,26 @@
       </div>
       <div class="game__items">
         <p>Items</p>
-        <img :src="item0" />
-        <img :src="item1" />
-        <img :src="item2" />
-        <img :src="item3" />
-        <img :src="item4" />
-        <img :src="item5" />
-        <img :src="item6" />
+        <img v-if="this.player.item0 != 0" :src="item0" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item1 != 0" :src="item1" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item2 != 0" :src="item2" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item3 != 0" :src="item3" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item4 != 0" :src="item4" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item5 != 0" :src="item5" />
+        <span v-else class="elseEmpty"></span>
+
+        <img v-if="this.player.item6 != 0" :src="item6" />
+        <span v-else class="elseEmpty"></span>
       </div>
       <div class="game__result">
         <p>{{ winOrLose }}</p>
@@ -171,5 +184,12 @@ export default {
 }
 .game__spell:last-child {
   right: 0;
+}
+.elseEmpty {
+  background-color: #99b9cf;
+  width: 64px;
+  height: 64px;
+  list-style: none;
+  display: inline-block;
 }
 </style>

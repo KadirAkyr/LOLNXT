@@ -30,13 +30,10 @@
         Welcome to Toxic Tracker
         <p><img class="myImg" src="/logo2.png" /></p>
       </div>
-      <div class="columns is-full has-background-white-ter roundedCorners info">
+      <div class="columns is-full roundedCorners info mt-6">
         <div class="column card has-text-centered">
-          <div class="">Toxic Tracker</div>
-          <div class="card-content">
-            For who ?
-            <p>If you are really toxic or if you are scared</p>
-          </div>
+          For who ?
+          <div class="card-content">Mad players like us</div>
         </div>
 
         <div class="column card has-text-centered">
@@ -44,10 +41,9 @@
           <div class="card-content">Just search for a summoner name !</div>
         </div>
 
-        <div class="column card">
-          <div class="card-content">
-            Developped by students give us your feedbacks at : xxxxx@gmail.com
-          </div>
+        <div class="column card has-text-centered">
+          Any questions ?
+          <div class="card-content mt-2">xxxxx@gmail.com</div>
         </div>
       </div>
     </template>

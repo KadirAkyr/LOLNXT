@@ -12,8 +12,8 @@
           {{ player.championName }}
         </p>
       </div>
-      <div class="game__score">
-        <p class="has-text-centered">Score</p>
+      <div class="game__score has-text-centered">
+        <p>Score</p>
         <p class="has-text-weight-bold">
           <span class="has-text-success">{{ player.kills }} </span> /
           <span class="has-text-danger">{{ player.deaths }}</span> /
@@ -24,7 +24,7 @@
         </p>
         <p>{{ player.totalMinionsKilled }} CS</p>
       </div>
-      <div class="game__items">
+      <div class="game__items is-flex-grow-1">
         <p>Items</p>
         <img v-if="this.player.item0 != 0" :src="item0" />
         <span v-else class="elseEmpty"></span>
@@ -47,9 +47,10 @@
         <img v-if="this.player.item6 != 0" :src="item6" />
         <span v-else class="elseEmpty"></span>
       </div>
-      <div class="game__result">
+      <div class="game__result has-text-centered">
         <p>{{ winOrLose }}</p>
-        <b-icon icon="crown" />
+        <b-icon v-if="this.player.win" icon="crown" />
+        <b-icon v-else icon="emoticon-poop" />
       </div>
     </div>
   </div>
@@ -172,6 +173,9 @@ export default {
 .game__champion {
   width: 96px;
   height: 96px;
+}
+.game__score {
+  width: 137px;
 }
 .game__spell {
   width: 32px;
